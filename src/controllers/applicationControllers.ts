@@ -4,7 +4,10 @@ import * as ApplicationService from "../service/applicationService";
 export const addApplication = async (req: Request, res: Response) => {
     try {
 
-        const newApllication = await ApplicationService.createApplication(req.body);
+        const newApllication = await ApplicationService.createApplication(
+            req.body,
+            req.user!.id
+        );
         res.status(201).json(newApllication)
         
     } catch (error) {

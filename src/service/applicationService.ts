@@ -3,11 +3,13 @@ import { Application, NewApplication } from "../types/application.types"
 
 
 //Add functionality
-export const createApplication = async (appData: NewApplication): Promise<Application> => {
+export const createApplication = async (appData: NewApplication, 
+    userId:number): 
+    Promise<Application> => {
     const{company_name, job_title, status} = appData;
 
     const {rows} = await query("INSERT INTO applications (company_name, job_title, status) VALUES ($1, $2, $3) RETURNING *",
-        [company_name, job_title, status]
+        [company_name, job_title, status, userId]
 
     );
     return rows[0];  
